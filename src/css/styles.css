@@ -4,7 +4,14 @@
 
 body {
   margin: 0;
+  padding: 0 16px;
   font-family: 'Montserrat', sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    padding: 0 24px;
+  }
 }
 
 a {
@@ -27,7 +34,19 @@ a:hover {
 }
 
 .gallery-item {
-  width: calc((100% - 48px) / 3);
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .gallery-item {
+    width: calc((100% - 24px) / 2);
+  }
+}
+
+@media screen and (min-width: 1176px) {
+  .gallery-item {
+    width: calc((100% - 48px) / 3);
+  }
 }
 
 .gallery-link {
@@ -59,8 +78,9 @@ body .sl-overlay {
 
 /* Styles for task-2 */
 .feedback-form {
-  padding: 24px;
-  width: 408px;
+  padding: 24px 0;
+  width: 100%;
+  max-width: 408px;
   background-color: #fff;
   border-radius: 8px;
   font-family: 'Montserrat', sans-serif;
@@ -69,6 +89,12 @@ body .sl-overlay {
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #2e2f42;
+}
+
+@media screen and (min-width: 768px) {
+  .feedback-form {
+    padding: 24px;
+  }
 }
 
 .feedback-form label {
@@ -112,6 +138,7 @@ body .sl-overlay {
   width: 95px;
   height: 40px;
   background: #4e75ff;
+  font-family: inherit;
   font-weight: 500;
   font-size: inherit;
   line-height: inherit;
