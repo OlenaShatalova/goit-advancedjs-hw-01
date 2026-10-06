@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
 a {
   color: currentColor;
 }
@@ -15,7 +20,7 @@ a:hover {
   max-width: 1128px;
   list-style-type: none;
   margin: 0 auto;
-  padding: 24px;
+  padding: 24px 0;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
@@ -54,8 +59,10 @@ body .sl-overlay {
 
 /* Styles for task-2 */
 .feedback-form {
-  padding: 20px;
-  width: 360px;
+  padding: 24px;
+  width: 408px;
+  background-color: #fff;
+  border-radius: 8px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -69,6 +76,10 @@ body .sl-overlay {
   margin-bottom: 8px;
 }
 
+.feedback-form label:last-of-type {
+  margin-bottom: 16px;
+}
+
 .feedback-form input,
 .feedback-form textarea {
   width: 100%;
@@ -78,6 +89,10 @@ body .sl-overlay {
   border-radius: 4px;
   margin-top: 8px;
   outline: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  transition: border-color 250ms ease;
 }
 
 .feedback-form textarea {
@@ -103,6 +118,7 @@ body .sl-overlay {
   letter-spacing: inherit;
   color: #fff;
   cursor: pointer;
+  transition: background-color 250ms ease;
 }
 
 .feedback-form button:hover {
