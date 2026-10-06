@@ -1,38 +1,59 @@
+const STORAGE_KEY = 'feedback-form-state';
+
 const formData = {
   email: '',
   message: '',
 };
 
 const feedbackForm = document.querySelector('.feedback-form');
-const localStorageKey = 'feedback-form-state';
 
-const localData = localStorage.getItem(localStorageKey);
-if (localData) {
-  const { email, message } = JSON.parse(localData);
-  feedbackForm.elements.email.value = email;
-  feedbackForm.elements.message.value = message;
-  formData.email = email;
-  formData.message = message;
+populateForm();
+
+feedbackForm.addEventListener('input', onFormInput);
+feedbackForm.addEventListener('submit', onFormSubmit);
+
+function onFormInput(event) {
+  const { name, value } = event.target;
+
+  if (!(name in formData)) {
+    return;
+  }
+
+  formData[name] = value.trim();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
-feedbackForm.addEventListener('input', e => {
-  formData.email = e.currentTarget.elements.email.value.trim();
-  formData.message = e.currentTarget.elements.message.value.trim();
-
-  localStorage.setItem(localStorageKey, JSON.stringify(formData));
-});
-
-feedbackForm.addEventListener('submit', e => {
-  e.preventDefault();
+function onFormSubmit(event) {
+  event.preventDefault();
 
   if (formData.email === '' || formData.message === '') {
-    return alert('Fill please all fields');
+    alert('Fill please all fields');
+    return;
   }
 
   console.log(formData);
 
-  localStorage.removeItem(localStorageKey);
-  feedbackForm.reset();
+  localStorage.removeItem(STORAGE_KEY);
   formData.email = '';
   formData.message = '';
-});
+  feedbackForm.reset();
+}
+
+function populateForm() {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+
+  if (!savedData) {
+    return;
+  }
+
+  try {
+    const { email = '', message = '' } = JSON.parse(savedData);
+
+    formData.email = email;
+    formData.message = message;
+    feedbackForm.elements.email.value = email;
+    feedbackForm.elements.message.value = message;
+  } catch (error) {
+    console.error('Failed to parse saved form data:', error.message);
+  }
+}
